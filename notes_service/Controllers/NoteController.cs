@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using notes_service.Models;
@@ -11,6 +12,7 @@ namespace notes_service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("AllowAny")]
     public class NoteController : ControllerBase
     {
     
@@ -21,6 +23,7 @@ namespace notes_service.Controllers
         }
 
         [HttpGet("{id}")]
+        [EnableCors("AllowAny")]
         public IActionResult Get(int id)
         {
             Note note = _notesRepository.GetNote(id);
@@ -29,12 +32,14 @@ namespace notes_service.Controllers
         }
 
         [HttpPost]
+        [EnableCors("AllowAny")]
         public IActionResult Post(Note note) 
         {
             return Ok(_notesRepository.CreateNote(note));
         }
         
         [HttpPut]
+        [EnableCors("AllowAny")]
         public IActionResult Put(Note note) 
         {   
             if(note.Id == 0) return NotFound();
@@ -44,6 +49,7 @@ namespace notes_service.Controllers
         }
 
         [HttpDelete("{id}")]
+        [EnableCors("AllowAny")]
         public IActionResult Delete(int id) 
         {
             if(id == 0) return NotFound();
