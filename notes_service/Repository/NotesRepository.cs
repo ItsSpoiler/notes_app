@@ -8,7 +8,7 @@ namespace notes_service.Repository
     {
         public Note CreateNote(Note note)
         {
-            using(var db = new LiteDatabase(@"Data\NotesData.db"))
+            using(var db = new LiteDatabase(@"filename=Data\NotesData.db;connection=shared"))
             {
                 var col = db.GetCollection<Note>("notes");
 
@@ -27,7 +27,7 @@ namespace notes_service.Repository
 
         public void DeleteNote(int id)
         {
-            using(var db = new LiteDatabase(@"Data\NotesData.db"))
+            using(var db = new LiteDatabase(@"filename=Data\NotesData.db;connection=shared"))
             {
                 var col = db.GetCollection<Note>("notes");
                 col.Delete(id);
@@ -36,7 +36,7 @@ namespace notes_service.Repository
 
         public void DeleteNotes(IEnumerable<int> ids)
         {
-            using(var db = new LiteDatabase(@"Data\NotesData.db"))
+            using(var db = new LiteDatabase(@"filename=Data\NotesData.db;connection=shared"))
             {
                 var col = db.GetCollection<Note>("notes");
                 foreach (var id in ids)
@@ -48,7 +48,7 @@ namespace notes_service.Repository
 
         public Note GetNote(int id)
         {
-            using(var db = new LiteDatabase(@"Data\NotesData.db"))
+            using(var db = new LiteDatabase(@"filename=Data\NotesData.db;connection=shared"))
             {
                 var col = db.GetCollection<Note>("notes");
                 return col.FindById(id);
@@ -66,7 +66,7 @@ namespace notes_service.Repository
 
         public Note UpdateNote(Note note)
         {
-            using(var db = new LiteDatabase(@"Data\NotesData.db"))
+            using(var db = new LiteDatabase(@"filename=Data\NotesData.db;connection=shared"))
             {
                 var col = db.GetCollection<Note>("notes");
                 Note oldNote = col.Query()
