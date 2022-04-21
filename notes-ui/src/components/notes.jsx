@@ -5,6 +5,9 @@ import DeleteNoteModal from './deleteNoteModal';
 import { Card, Row, Col } from "react-bootstrap";
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
+import {
+    Link
+  } from "react-router-dom";
 class Notes extends Component {
     constructor(props) {
         super(props);
@@ -53,16 +56,20 @@ class Notes extends Component {
                             note =>
 
                                 <Col sm={4}>
-                                    <Card style={{ width: '18rem', margin: '5%' }} Key={note.id}>
+                                    
+                                    <Card style={{ width: '18rem', margin: '5%' }} key={note.id}>
                                         <Card.Body>
+                                        <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/${note.id}`}>
                                             <Card.Title>{note.subject}</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">{Intl.DateTimeFormat('en-US').format(new Date(note.date))}</Card.Subtitle>
                                             <Card.Text>
                                                 {note.body}
                                             </Card.Text>
-                                            <div style={{ float: 'right' }}><EditNoteModal id={note.id} subject={note.subject} body={note.body} handleUpdateNote={this.updateNoteList} /><DeleteNoteModal id={note.id} handleDeleteNote={this.deleteFromNoteList} /></div>
+                                            </Link>
+                                            <div style={{ float: 'right', padding: '3%' }}><EditNoteModal id={note.id} subject={note.subject} body={note.body} handleUpdateNote={this.updateNoteList} /><DeleteNoteModal id={note.id} handleDeleteNote={this.deleteFromNoteList} /></div>
                                         </Card.Body>
                                     </Card>
+                                    
                                 </Col>
 
                         )
